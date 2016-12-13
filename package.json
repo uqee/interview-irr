@@ -6,6 +6,9 @@
     "type": "git",
     "url": "git+https://github.com/uqee/interview-irr.git"
   },
+  "engines": {
+    "node": "^6.9.1"
+  },
   "scripts": {
     "test": "jest"
   },
