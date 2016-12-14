@@ -1,7 +1,6 @@
 const quaddouble = require('./index');
 
 describe('required', () => {
-
   test('(45568411115, 11223344) -> true', () => {
     expect(quaddouble(45568411115, 11223344)).toBe(true);
   });
@@ -20,17 +19,16 @@ describe('required', () => {
 });
 
 describe('custom', () => {
-
-  test('(4556841.1115, .11223344) -> false', () => {
-    expect(quaddouble(4556841.1115, .11223344)).toBe(false);
+  test('(4556841.1115, 0.11223344) -> false', () => {
+    expect(quaddouble(4556841.1115, 0.11223344)).toBe(false);
   });
 
   test('(121122111222, 0) -> false', () => {
     expect(quaddouble(121122111222, 0)).toBe(false);
   });
 
-  test('(0000, 00) -> false', () => {
-    expect(quaddouble(0000, 00)).toBe(false);
+  test('(1 / 3, 33) -> true', () => {
+    expect(quaddouble(1 / 3, 33)).toBe(true);
   });
 
   test('(0b100001, 0b1001) -> false', () => {
