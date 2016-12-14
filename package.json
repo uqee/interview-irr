@@ -1,7 +1,6 @@
 {
   "name": "interview-irr",
   "version": "0.0.1",
-  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/uqee/interview-irr.git"
