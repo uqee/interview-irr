@@ -1,6 +1,7 @@
 /* eslint no-extend-native: ['error', { 'exceptions': ['Array'] }] */
 
 function coalesce(fn) {
+  if (fn !== undefined && typeof fn !== 'function') throw new TypeError('Not a function');
   return fn || (value => value);
 }
 
@@ -24,9 +25,6 @@ function assembly(fn) {
 }
 
 Array.prototype.groupBy = function groupBy(filter) {
-  if (filter !== undefined && typeof filter !== 'function') {
-    throw new TypeError('Filter must be a function');
-  }
   const fn = assembly(memoize(coalesce(filter)));
   return this.reduce((result, value) => fn(value), null);
 };

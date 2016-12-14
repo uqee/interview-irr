@@ -38,7 +38,7 @@ describe('custom tests', () => {
   ];
 
   describe('input verification', () => {
-    const err = 'Filter must be a function';
+    const err = 'Not a function';
 
     test('null filter', () => {
       expect(() => arr.groupBy(null)).toThrowError(err);
