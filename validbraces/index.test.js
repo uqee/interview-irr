@@ -1,21 +1,45 @@
-import validBraces from './index';
+const validbraces = require('./index');
 
-test('() -> true', () => {
-  expect(validBraces('()')).toEqual(true);
+describe('required', () => {
+  test('() -> true', () => {
+    expect(validbraces('()')).toEqual(true);
+  });
+
+  test('[) -> false', () => {
+    expect(validbraces('[)')).toEqual(false);
+  });
+
+  test('{}[]() -> true', () => {
+    expect(validbraces('{}[]()')).toEqual(true);
+  });
+
+  test('([{}]) -> true', () => {
+    expect(validbraces('([{}])')).toEqual(true);
+  });
+
+  test('())({}}{()][][ -> false', () => {
+    expect(validbraces('())({}}{()][][')).toEqual(false);
+  });
 });
 
-test('[) -> false', () => {
-  expect(validBraces('[)')).toEqual(false);
-});
+describe('custom', () => {
+  test('(() -> false', () => {
+    expect(validbraces('(()')).toEqual(false);
+  });
 
-test('{}[]() -> true', () => {
-  expect(validBraces('{}[]()')).toEqual(true);
-});
+  test('([)] -> false', () => {
+    expect(validbraces('([)]')).toEqual(false);
+  });
 
-test('([{}]) -> true', () => {
-  expect(validBraces('([{}])')).toEqual(true);
-});
+  test('{{}[[]}] -> false', () => {
+    expect(validbraces('{{}[[]}]')).toEqual(false);
+  });
 
-test('())({}}{()][][ -> false', () => {
-  expect(validBraces('())({}}{()][][')).toEqual(false);
+  test('([{}()]({})([])) -> true', () => {
+    expect(validbraces('([{}()]({})([]))')).toEqual(true);
+  });
+
+  test('((((((()))))))) -> false', () => {
+    expect(validbraces('((((((())))))))')).toEqual(false);
+  });
 });
