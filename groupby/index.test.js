@@ -1,6 +1,6 @@
 require('./index');
 
-describe('required tests', () => {
+describe('required', () => {
   const arr = [1, 2, 3, 2, 4, 1, 5, 1, 6];
   const fn = (val => val % 3);
 
@@ -17,7 +17,7 @@ describe('required tests', () => {
     expect(a).toEqual(b);
   });
 
-  test('filter', () => {
+  test('custom', () => {
     const a = arr.groupBy(fn);
     const b = new Map([
       [1, [1, 4, 1, 1]],
@@ -28,7 +28,7 @@ describe('required tests', () => {
   });
 });
 
-describe('custom tests', () => {
+describe('custom', () => {
   const foo = () => {};
   const bar = { a: 42 };
   const arr = [
@@ -36,56 +36,50 @@ describe('custom tests', () => {
     'foo', NaN, undefined, null, 0, '', '',
     foo, bar, bar, foo, undefined, 652,
   ];
+  const fn = (val => val % 3);
+  const err = 'Not a function';
 
-  describe('input verification', () => {
-    const err = 'Not a function';
-
-    test('null filter', () => {
-      expect(() => arr.groupBy(null)).toThrowError(err);
-    });
-
-    test('invalid filter', () => {
-      expect(() => arr.groupBy(42)).toThrowError(err);
-    });
+  test('null', () => {
+    expect(() => arr.groupBy(null)).toThrowError(err);
   });
 
-  describe('filter', () => {
-    const fn = (val => val % 3);
+  test('invalid', () => {
+    expect(() => arr.groupBy(42)).toThrowError(err);
+  });
 
-    test('immutability', () => {
-      const a = arr;
-      arr.groupBy(fn);
-      expect(arr).toEqual(a);
-    });
+  test('default', () => {
+    const a = arr.groupBy();
+    const b = new Map([
+      [1, [1, 1]],
+      [NaN, [NaN, NaN]],
+      [2, [2]],
+      ['foo', ['foo', 'foo']],
+      [null, [null, null]],
+      ['bar', ['bar']],
+      [undefined, [undefined, undefined]],
+      [0, [0]],
+      ['', ['', '']],
+      [foo, [foo, foo]],
+      [bar, [bar, bar]],
+      [652, [652]],
+    ]);
+    expect(a).toEqual(b);
+  });
 
-    test('default', () => {
-      const a = arr.groupBy();
-      const b = new Map([
-        [1, [1, 1]],
-        [NaN, [NaN, NaN]],
-        [2, [2]],
-        ['foo', ['foo', 'foo']],
-        [null, [null, null]],
-        ['bar', ['bar']],
-        [undefined, [undefined, undefined]],
-        [0, [0]],
-        ['', ['', '']],
-        [foo, [foo, foo]],
-        [bar, [bar, bar]],
-        [652, [652]],
-      ]);
-      expect(a).toEqual(b);
-    });
+  test('custom', () => {
+    const a = arr.groupBy(fn);
+    const b = new Map([
+      [1, [1, 1, 652]],
+      [NaN, [NaN, 'foo', 'bar', 'foo', NaN, undefined, foo, bar, bar, foo, undefined]],
+      [2, [2]],
+      [0, [null, null, 0, '', '']],
+    ]);
+    expect(a).toEqual(b);
+  });
 
-    test('custom', () => {
-      const a = arr.groupBy(fn);
-      const b = new Map([
-        [1, [1, 1, 652]],
-        [NaN, [NaN, 'foo', 'bar', 'foo', NaN, undefined, foo, bar, bar, foo, undefined]],
-        [2, [2]],
-        [0, [null, null, 0, '', '']],
-      ]);
-      expect(a).toEqual(b);
-    });
+  test('immutable', () => {
+    const a = arr;
+    arr.groupBy(fn);
+    expect(arr).toEqual(a);
   });
 });
