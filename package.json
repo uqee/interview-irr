@@ -1,0 +1,26 @@
+{
+  "name": "interview-irr",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uqee/interview-irr.git"
+  },
+  "engines": {
+    "node": "^6.9.1"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "eslint": "^3.12.1",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.8.0",
+    "jest": "^17.0.3"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "verbose": true
+  }
+}

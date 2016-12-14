@@ -1,0 +1,17 @@
+{
+  "extends": "airbnb",
+  "plugins": [
+    "react",
+    "jsx-a11y",
+    "import"
+  ],
+  "env": {
+    "node": true,
+    "commonjs": true,
+    "es6": true,
+    "jest": true
+  },
+  "rules": {
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }]
+  }
+}
